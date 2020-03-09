@@ -2,8 +2,9 @@
   <div class="container">
     <div class="row header-section">
             <div class="col-12">
-                  <div class="logo-block">
-                     <img src="assets/logo.png" alt="Quiz" height="40">
+                  <div class="d-flex justify-content-center">
+                     
+                     <h6 class="bb2"> Online Quiz </h6>
                   </div>  <!-- End Logo Block -->
             </div>  <!-- End md 2 -->
       </div>    <!-- End row -->
@@ -12,42 +13,56 @@
 
 
 <div class="container mh">
-
-
-
-  
     <div class="component-div h70">
-      <div style="margin-top: 40px;">
+      <div style="margin-top: 20px;">
+        <form (ngSubmit)="omSubmit($event, user)"> 
         <div class="card">
-          <div class="card-body ">
+          <div class="card-body">
                 <div class="form-group">
-                 <h6> User Info :: </h6>
+                  <h6> Participant Info :: </h6>
                 </div>
                 <div class="form-group">
-                  <input type="text" class="form-control form-control-sm" placeholder="Username">
+                  <input type="text" class="form-control form-control-sm" name="username" placeholder="Username" value="Ahmad" required [(ngModel)]="user.name">
                 </div>  <!-- End form-group -->
 
                 <div class="form-group">
-                  <input type="text" class="form-control form-control-sm" placeholder="Email Address">
+                  <input type="text" class="form-control form-control-sm" name="userEmail" placeholder="Email Address" value="TheAhmadSharif@gmail.com" required [(ngModel)]="user.email">
                 </div>  <!-- End form-group -->
           </div>  <!-- End card body -->
         </div> <!-- End card -->
 
 
-        <div class="card">
 
+
+      <div *ngIf="!items" style="margin-top: 20px;">
+            <li *ngFor="let index of [0,1,2,3,4]" class="card card-loader col-12" style="margin-top: 20px;">
+          </li>
+      </div> <!-- End -->
+
+      <div *ngIf="items" class="card-body">
+          <h6>Questions are given below: </h6>
+      </div> <!-- End -->
+
+        
+        <div *ngFor="let item of items; let i = index;" class="card" style="margin-bottom: 10px;">
             <div class="card-body">
-                <div>
-                  What is color of orange?
+                <div class="bb1 d-ib">
+                  {{ i + 1}}. {{ item.question }}
                 </div>
-                <input type="radio" id="red" name="color" value="male">
-                <label for="red">Red</label><br>
-                <input type="radio" id="green" name="color" value="female">
-                <label for="green">Green</label><br>
-                <input type="radio" id="orange" name="color" value="other">
-                <label for="orange">Orange</label>
+                <div *ngFor="let opt of item.option; let j = index;" class="radio-div">
+                  <input type="radio" [id]="opt" [name]="[i]" [value]="opt">
+                  <label [for]="[i]" [class]="user.mark[j]">{{ opt }}</label><br>
+                </div>
             </div> <!-- End card body -->
         </div>  <!-- End card -->
+
+      <div style="margin-top: 20px;">
+        <button class="btn btn-primary">Submit</button>
+      </div>  <!-- End  -->
+
+      </form>
+
+
       </div>  <!-- End -->
     </div>  <!-- End component-div -->
 </div> <!--  End container -->  
