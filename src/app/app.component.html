@@ -22,11 +22,35 @@
                   <h6> Participant Info :: </h6>
                 </div>
                 <div class="form-group">
-                  <input type="text" class="form-control form-control-sm" name="username" placeholder="Username" value="Ahmad" required [(ngModel)]="user.name">
+                  <input type="text" class="form-control form-control-sm" name="username" placeholder="Username" value="Ahmad" required minlength="4" [(ngModel)]="user.name" #username="ngModel">
+                  
+
+                  <div *ngIf="username.invalid && (username.dirty || username.touched)" class="alert alert-warning">
+
+                    <div *ngIf="username.errors.required">
+                      Username is required.
+                    </div>
+                    <div *ngIf="username.errors.minlength">
+                      Username must be at least 4 characters long.
+                    </div>  <!-- End  -->
+                  </div> <!-- End  -->
+
+
+                  
                 </div>  <!-- End form-group -->
 
+                
+
                 <div class="form-group">
-                  <input type="text" class="form-control form-control-sm" name="userEmail" placeholder="Email Address" value="TheAhmadSharif@gmail.com" required [(ngModel)]="user.email">
+
+                      <input type="text" class="form-control form-control-sm" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" id="email" name="email" ngModel #emailref="ngModel" [(ngModel)]="user.email" placeholder="Email Address">
+                      <div *ngIf="emailref.errors &&(emailref.touched || emailref.dirty)" class ="alert alert-warning">
+                      <div [hidden]="!emailref.errors?.pattern">
+                        Invalid pattern
+                      </div> 
+                      </div>
+
+
                 </div>  <!-- End form-group -->
           </div>  <!-- End card body -->
         </div> <!-- End card -->
@@ -61,11 +85,16 @@
             </div> <!-- End card body -->
         </div>  <!-- End card -->
 
+        <div *ngIf="publishscore" class="card">
+            <div class="card-body">
+              You score is {{ score }}
+            </div>  <!-- End -->
+        </div> <!-- End -->
+
       <div style="margin-top: 20px;">
         <button class="btn btn-success" style="margin-right: 10px">Submit</button>
-        <button class="btn btn-warning">Reset</button>
+        <button class="btn btn-warning" (click)="refreshPage()">Reset</button>
       </div>  <!-- End  -->
-
       </form>
 
 
