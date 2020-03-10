@@ -36,6 +36,12 @@ export class AppComponent {
     
   }
 
+  getUserValue(question_no, useranswer) {
+
+      this.userObject[question_no] = useranswer;
+      console.log(question_no, useranswer, this.userObject);
+  }
+
   omSubmit(event:any, user) {
     event.preventDefault();
 
@@ -43,10 +49,6 @@ export class AppComponent {
     var answer = ["Orange", "Dhaka"];
 
     this.user.mark = [];
-
-    
-
-
   }
 
 }
