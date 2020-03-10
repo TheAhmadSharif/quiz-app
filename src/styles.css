@@ -65,3 +65,8 @@ footer {
     position: relative;
     border-bottom: 2px solid red;
 }
+
+a,a:hover{
+    text-decoration: none;
+    color: #333;
+}

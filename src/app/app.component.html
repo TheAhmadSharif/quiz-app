@@ -4,7 +4,7 @@
             <div class="col-12">
                   <div class="d-flex justify-content-center">
                      
-                     <h6 class="bb2"> Online Quiz </h6>
+                     <h6 class="bb2"> <a href="#">Online Quiz</a> </h6>
                   </div>  <!-- End Logo Block -->
             </div>  <!-- End md 2 -->
       </div>    <!-- End row -->
@@ -49,9 +49,13 @@
                 <div class="bb1 d-ib">
                   {{ i + 1}}. {{ item.question }}
                 </div>
-                <div *ngFor="let opt of item.option; let j = index;" class="radio-div">
-                  <input type="radio" [id]="opt" [name]="[i]" [value]="opt" #useranswer (click)="getUserValue(i, useranswer.value)">
-                  <label [class]="user.mark[j]">{{ opt }}</label><br>
+                <div *ngFor="let opt of item.option; let j = index;" class="radio-div" (click)="getUserValue(i, j, useranswer.value)">
+                  <div>
+                    <input type="radio" [name]="[i]" [value]="opt" #useranswer (click)="getUserValue(i, j, useranswer.value)">
+                    <label [class]="user.mark[i]">
+                      {{ opt }}
+                    </label>
+                  </div> <!-- End -->
                 </div>
             </div> <!-- End card body -->
         </div>  <!-- End card -->
