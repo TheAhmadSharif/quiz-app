@@ -40,30 +40,16 @@ footer {
     margin: 20px 0;
 }
 
-.radio-div {
-    display: block;
-    position: relative;
-    z-index: 10;
-    top: 0;
-    left: 0;
-}
-.radio-div::after {
-    content: ' ';
-    position: absolute;
-    width: 60px;
-    margin-left: 28px;
-    bottom: 5px;
-    left: 5px;
-}
-
 .correctMark {
     position: relative;
     border-bottom: 2px solid green;
+    display: inline-block;
 }
 
 .wrongMark {
     position: relative;
     border-bottom: 2px solid red;
+    display: inline-block;
 }
 
 a,a:hover{
