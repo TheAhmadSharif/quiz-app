@@ -16,8 +16,8 @@ export class AppComponent implements OnInit {
   idList = [];
   userObject = [];
   user = {
-    name: '',
-    email: '',
+    name: 'Ahmad',
+    email: 'ahmad@gmail.com',
   }
   answer = ["Orange", "Dhaka"];
   publishscore: boolean;
@@ -48,6 +48,16 @@ export class AppComponent implements OnInit {
     this.publishscore = true;
     event.preventDefault();
     var element = document.getElementById("mark-*");
+    this.score = 0;
+
+    // var el =  document.querySelector('input[name=]:checked').value;
+
+    // console.log(el.length);
+
+    // for(var i=0; i<el.length; i++) {
+    //   el[i].checked = false;
+    // }
+      
 
    for(var i = 0; i < this.userObject.length; i++) {
     let id = this.idList[i];
