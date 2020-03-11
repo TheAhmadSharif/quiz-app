@@ -11,7 +11,8 @@ import 'firebase/firestore';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-
+  isSubmitted: boolean;
+  correctAnswerPosition = [];
   items:any;
   idList = [];
   userObject = [];
@@ -26,16 +27,32 @@ export class AppComponent implements OnInit {
   
   constructor(public firestore: AngularFirestore) {
     firestore.collection('quiz').valueChanges().subscribe(object => {
-
       this.items = object;
 
-      
+
+      for(var i = 0; i < this.items.length; i++) {
+
+            for(var j = 0; j < this.items[0].option.length; j++) {
+                if(this.items[i].option[j] == this.answer[i]) {
+                    this.correctAnswerPosition[i] = 'mark-' + i.toString() + j.toString();
+                }
+            }
+
+      }
+
+      console.log(this.correctAnswerPosition, 'this.correctAnswerPosition');
+
+
+
     });
     
   }
 
   ngOnInit() {
-
+      this.score = 0;
+      this.user.name = null;
+      this.user.email = null;
+      this.isSubmitted = true;
   }
 
   getUserValue(question_no:number, option_no:number, useranswer:string) {
@@ -45,30 +62,48 @@ export class AppComponent implements OnInit {
   }
 
   omSubmit(event:any, user) {
-    this.publishscore = true;
     event.preventDefault();
-    var element = document.getElementById("mark-*");
+    this.publishscore = true;
+    this.correctAnswerPosition;
+    this.score = 0;
+
 
    for(var i = 0; i < this.userObject.length; i++) {
     let id = this.idList[i];
+    let correctid = this.correctAnswerPosition[i];
 
     if(this.answer[i] == this.userObject[i]) {
         document.getElementById(id).classList.add("correctMark");
         this.score = this.score + 1;
     }
     else {
+        document.getElementById(correctid).classList.add("correctMark");
         document.getElementById(id).classList.add("wrongMark");
     }
    }
     var email = user.email;
 
-    console.log(user, this.score);
 
-     this.firestore.collection('quiz_answer').doc(email).set({
-        username: user.name,
-        email: user.email,
-        score: this.score
-     })
+
+    if(this.userObject.length > 0 && email && user.name) {
+          this.firestore.collection('quiz_answer').doc(email).set({
+            username: user.name,
+            email: user.email,
+            score: this.score
+        })
+        .then(function() {
+          
+      })
+      .catch(function(error) {
+          console.error("Error writing document: ", error);
+      });
+
+      this.isSubmitted = false;
+
+      
+    }
+
+     
 
   }
 
