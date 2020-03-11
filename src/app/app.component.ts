@@ -17,8 +17,8 @@ export class AppComponent implements OnInit {
   idList = [];
   userObject = [];
   user = {
-    name: '',
-    email: '',
+    name: 'Ahmad',
+    email: 'ahmad@gmail.com',
   }
   answer = ["Orange", "Dhaka"];
   publishscore: boolean;
@@ -40,9 +40,6 @@ export class AppComponent implements OnInit {
 
       }
 
-      console.log(this.correctAnswerPosition, 'this.correctAnswerPosition');
-
-
 
     });
     
@@ -63,6 +60,7 @@ export class AppComponent implements OnInit {
 
   omSubmit(event:any, user) {
     event.preventDefault();
+
     this.publishscore = true;
     this.correctAnswerPosition;
     this.score = 0;
